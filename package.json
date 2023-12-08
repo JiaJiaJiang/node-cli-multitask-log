@@ -1,0 +1,23 @@
+{
+  "name": "cli-multitask-log",
+  "version": "1.0.0",
+  "description": "refresh log in situ for multi tasks",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JiaJiaJiang/node-cli-multitask-log.git"
+  },
+  "keywords": [
+    "cli",
+    "log"
+  ],
+  "author": "luojia@luojia.me",
+  "license": "LGPL-2.1",
+  "bugs": {
+    "url": "https://github.com/JiaJiaJiang/node-cli-multitask-log/issues"
+  },
+  "homepage": "https://github.com/JiaJiaJiang/node-cli-multitask-log#readme"
+}
