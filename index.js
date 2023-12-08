@@ -49,12 +49,13 @@ function autoRefreshStart(msInterval) {
 /**
  *Stop auto refresh
  *Notice: this method will do an extra refreshing
- *
+ * @param {boolean} [clearTasks=true] clear tasks after stopped
  */
-function autoRefreshStop() {
+function autoRefreshStop(clearTasks=true) {
 	clearInterval(refreshTimer);
 	refreshLogs(true);
 	refreshTimer = null;
+	if(clearTasks)taskLogs.clear();
 }
 
 exports.tasks = taskLogs;

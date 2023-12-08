@@ -29,6 +29,8 @@ taskLog.refreshLogs(true);
 taskLog.autoRefreshStart(1000);//set auto refresh interval to 1000ms
 //then stop it when you want
 taskLog.autoRefreshStop();
+//it will clear tasks by default, if you want to keep tasks,use
+taskLog.autoRefreshStop(false);
 
 
 //normally you shoud not log other things when logging task logs
