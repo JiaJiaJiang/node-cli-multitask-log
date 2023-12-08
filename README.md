@@ -34,8 +34,15 @@ taskLog.autoRefreshStop(false);
 
 
 //normally you shoud not log other things when logging task logs
-//but if you do, you must call breakLog() after your log to prevent your log from being overwritten
+//but if you do, you must call breakLog() after your log to prevent it from being overwritten
 taskLog.breakLog();
 ```
 
-It's all the usages above, just a simple log tool.
+Here are all the usages above, just a simple log tool.
+
+This lib also contaions a simple progress bar:
+```javascript
+taskLog.tasks.set('any name',
+	taskLog.simpleProgress('>', () => [process.uptime() * 1000, 100000])
+);
+```

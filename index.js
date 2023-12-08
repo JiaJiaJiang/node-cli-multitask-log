@@ -57,9 +57,23 @@ function autoRefreshStop(clearTasks=true) {
 	refreshTimer = null;
 	if(clearTasks)taskLogs.clear();
 }
+/**
+ *A simple progress demo
+ *
+ * @param {string} [barChar='>'] character to fill the done part
+ * @param {Function} dataFunc a function return an Array of number: [done,total]
+ * @returns {Function} return a function that generate the progress bar
+ */
+function simpleProgress(barChar='>',dataFunc){
+	return ()=>{
+		const data = dataFunc();
+		return barChar.repeat(Math.min(process.stdout.columns,Math.round(process.stdout.columns*(data[0]/data[1]))));
+	};
+}
 
 exports.tasks = taskLogs;
 exports.refreshLogs = refreshLogs;
 exports.breakLog = breakLog;
 exports.autoRefreshStart = autoRefreshStart;
 exports.autoRefreshStop = autoRefreshStop;
+exports.simpleProgress = simpleProgress;
