@@ -8,13 +8,21 @@ const taskLog = require('cli-multitask-log');
 //'tasks' is just a Map object, it saves the log content for the tasks
 //so you can set any key that can be a key for a Map object
 taskLog.tasks.set('task1','log content here');//'task1' is just a key, it won't be displayed
-taskLog.tasks.set('task2','log content here');
+taskLog.tasks.set('task2',()=>'random:'+Math.random());//set function as the value for generating log content before refresh
+//IMPORTANT: order of the tasks is the same as the order of the keys in the Map object
+
+
 //to delete a task
 taskLog.tasks.delete('task1');
+//to clear all tasks
+taskLog.tasks.clear();
 
 
 //manual refresh
 taskLog.refreshLogs();
+//NOTICE: This method will not output anything in none TTY environments
+//to force output the last result, use
+taskLog.refreshLogs(true);
 
 
 //or start an auto refresh task
