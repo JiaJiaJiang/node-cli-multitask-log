@@ -51,9 +51,9 @@ function autoRefreshStart(msInterval) {
  *Notice: this method will do an extra refreshing
  * @param {boolean} [clearTasks=true] clear tasks after stopped
  */
-function autoRefreshStop(clearTasks = true) {
+async function autoRefreshStop(clearTasks = true) {
 	clearInterval(refreshTimer);
-	refreshLogs(true);
+	await refreshLogs(true);
 	refreshTimer = null;
 	if (clearTasks) taskLogs.clear();
 }
