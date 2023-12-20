@@ -10,20 +10,20 @@ let logBreak = false,
  *
  * @param {boolean} [forceOutput=false] if not in TTY, this method will not output by default, set to true to force output when it's the last task log
  */
-function refreshLogs(forceOutput=false) {
-	if(!process.stdout.isTTY&&!forceOutput)return;
+async function refreshLogs(forceOutput = false) {
+	if (!process.stdout.isTTY && !forceOutput) return;
 	if (!taskLogs.size) return;
 	if (!logBreak) {
 		readline.moveCursor(process.stdout, -999, -lastLogLines);
 		readline.clearScreenDown(process.stdout);
 	}
-	const content = [...taskLogs].map(i => {
+	const content = (await Promise.all([...taskLogs].map(i => {
 		if (i[1] instanceof Function) {
 			return i[1]();
 		} else {
 			return i[1];
 		}
-	}).join('\n');
+	}))).join('\n');
 	console.log(content);
 	lastLogLines = [...content.matchAll(/\n/g)].length + 1;//+one return from above log
 	logBreak = false;
@@ -51,11 +51,11 @@ function autoRefreshStart(msInterval) {
  *Notice: this method will do an extra refreshing
  * @param {boolean} [clearTasks=true] clear tasks after stopped
  */
-function autoRefreshStop(clearTasks=true) {
+function autoRefreshStop(clearTasks = true) {
 	clearInterval(refreshTimer);
 	refreshLogs(true);
 	refreshTimer = null;
-	if(clearTasks)taskLogs.clear();
+	if (clearTasks) taskLogs.clear();
 }
 /**
  *A simple progress demo
@@ -64,10 +64,10 @@ function autoRefreshStop(clearTasks=true) {
  * @param {Function} dataFunc a function return an Array of number: [done,total]
  * @returns {Function} return a function that generate the progress bar
  */
-function simpleProgress(barChar='>',dataFunc){
-	return ()=>{
+function simpleProgress(barChar = '>', dataFunc) {
+	return () => {
 		const data = dataFunc();
-		return barChar.repeat(Math.min(process.stdout.columns,Math.round(process.stdout.columns*(data[0]/data[1]))));
+		return barChar.repeat(Math.min(process.stdout.columns, Math.round(process.stdout.columns * (data[0] / data[1]))));
 	};
 }
 
