@@ -67,7 +67,7 @@ async function autoRefreshStop(clearTasks = true) {
 function simpleProgress(barChar = '>', dataFunc) {
 	return () => {
 		const data = dataFunc();
-		return barChar.repeat(Math.min(process.stdout.columns, Math.round(process.stdout.columns * (data[0] / data[1]))));
+		return barChar.repeat(Math.max(0,Math.min(process.stdout.columns, Math.round(process.stdout.columns * (data[0] / data[1])))));
 	};
 }
 
